@@ -1,3 +1,35 @@
+"use client";
+
+import SearchBox from "@/components/search";
+import { Typewriter } from "react-simple-typewriter";
+
 export default function Home() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <main className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      <h1 className="text-3xl font-semibold mb-2">Paprika’ya Hoşgeldin</h1>
+      <p className="text-gray-600 mb-6 max-w-md">
+        Aradığın{" "}
+        <span className="text-black font-medium">
+          <Typewriter
+            words={[
+              "psikoloji",
+              "yapay zeka",
+              "bilişsel bilim",
+              "eğitim",
+              "nörobilim",
+            ]}
+            loop={true}
+            cursor
+            cursorStyle="|"
+            typeSpeed={80}
+            deleteSpeed={50}
+            delaySpeed={1500}
+          />
+        </span>
+        makalesini bulmana yardımcı olalım. (umarız)
+      </p>
+
+      <SearchBox />
+    </main>
+  );
 }
