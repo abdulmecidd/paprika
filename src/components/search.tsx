@@ -25,7 +25,9 @@ export default function SearchBox({
     <form onSubmit={handleSearch} className="w-full max-w-sm flex gap-2">
       <Input
         type="text"
-        placeholder="Makale başlığı veya anahtar kelime..."
+        placeholder={
+          searchQuery ? searchQuery : "Makale veya anahtar kelime ara..."
+        }
         className="flex-1"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}

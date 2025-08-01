@@ -2,6 +2,9 @@ export interface CrossrefAuthor {
   given?: string;
   family?: string;
 }
+export interface CrossrefResource {
+  URL?: string;
+}
 
 export interface CrossrefItem {
   title: string[];
@@ -9,7 +12,13 @@ export interface CrossrefItem {
   DOI: string;
   URL: string;
   publisher?: string;
+  abstract?: string;
   type?: string;
+  created?: {
+    "date-parts": number[][];
+  };
+  language?: string;
+  resource?: { primary: CrossrefResource };
   "published-online"?: {
     "date-parts": number[][];
   };
