@@ -6,6 +6,11 @@ export interface CrossrefResource {
   URL?: string;
 }
 
+export interface CrossRefResponse {
+  items: CrossrefItem[] | [];
+  totalPages: number | null;
+}
+
 export interface CrossrefItem {
   title: string[];
   author?: CrossrefAuthor[];
@@ -26,4 +31,5 @@ export interface CrossrefItem {
     "date-parts": number[][];
   };
   "container-title"?: string[];
+  "is-referenced-by-count"?: number;
 }

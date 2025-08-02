@@ -7,13 +7,8 @@ import {
   CardTitle,
   CardDescription,
 } from "./ui/card";
-import {
-  Calendar,
-  Globe,
-  BookOpen,
-  ExternalLink,
-  FileText,
-} from "lucide-react";
+import { Calendar, Globe, ExternalLink, FileText } from "lucide-react";
+import { truncuateText } from "@/lib/funcs";
 
 interface ArticleCardProps {
   item: CrossrefItem;
@@ -27,37 +22,50 @@ export const ArticleCard = ({ item }: ArticleCardProps) => {
   const sourceUrl = item.resource?.primary?.URL;
   const createdDate =
     item.created?.["date-parts"]?.[0]?.join("-") || "Tarih yok";
+  const citationCount = item["is-referenced-by-count"] ?? null;
 
   return (
-    <Card className="rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300">
+    <Card
+      className="rounded-2xl shadow-md border border-gray-200 bg-white hover:shadow-lg transition-all duration-300
+      dark:bg-gray-800 dark:border-gray-700 dark:hover:shadow-gray-900"
+    >
       <CardHeader className="pb-2">
-        <CardTitle className="text-xl font-semibold flex items-start gap-2">
-          <BookOpen size={20} className="text-blue-600 mt-1" />
-          {title}
+        <CardTitle className="text-xl font-semibold flex items-start gap-2 dark:text-gray-100">
+          {truncuateText(title, 60)}
         </CardTitle>
-        <CardDescription className="text-sm text-gray-500 mt-1 flex items-center gap-1">
+        <CardDescription className="text-sm text-gray-500 mt-1 flex items-center gap-1 dark:text-gray-400">
           <FileText size={16} />
           {publisher}
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="text-sm space-y-3 text-gray-700">
+      <CardContent className="text-sm space-y-3 text-gray-700 dark:text-gray-300">
         <div className="flex items-center gap-2">
-          <Calendar size={16} className="text-gray-500" />
+          <Calendar size={16} className="text-gray-500 dark:text-gray-400" />
           <span>Yayın Tarihi: {createdDate}</span>
         </div>
 
         <div className="flex items-center gap-2">
-          <Globe size={16} className="text-gray-500" />
+          <Globe size={16} className="text-gray-500 dark:text-gray-400" />
           <span>Dil: {language}</span>
         </div>
 
+        {citationCount !== null && (
+          <div className="flex items-center gap-2">
+            <FileText size={16} className="text-gray-500 dark:text-gray-400" />
+            <span>Atıf: {citationCount} kez</span>
+          </div>
+        )}
+
         {sourceUrl && (
           <div className="flex items-center gap-2">
-            <ExternalLink size={16} className="text-gray-500" />
+            <ExternalLink
+              size={16}
+              className="text-gray-500 dark:text-gray-400"
+            />
             <a
               href={sourceUrl}
-              className="text-blue-600 hover:underline"
+              className="text-gray-600 hover:underline dark:text-gray-300"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -70,7 +78,8 @@ export const ArticleCard = ({ item }: ArticleCardProps) => {
       <CardFooter className="pt-4">
         <a
           href={url}
-          className="inline-flex items-center gap-2 text-sm text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 transition"
+          className="inline-flex items-center gap-2 text-sm text-white bg-gray-900 px-4 py-2 rounded-md hover:bg-gray-700 transition
+            dark:bg-gray-700 dark:hover:bg-gray-600"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -12,6 +12,10 @@ export default function SearchBox({
 }) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState(defaultValue);
+
+  useEffect(() => {
+    setSearchQuery(defaultValue);
+  }, [defaultValue]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,9 +29,7 @@ export default function SearchBox({
     <form onSubmit={handleSearch} className="w-full max-w-sm flex gap-2">
       <Input
         type="text"
-        placeholder={
-          searchQuery ? searchQuery : "Makale veya anahtar kelime ara..."
-        }
+        placeholder="Makale veya anahtar kelime ara..."
         className="flex-1"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
