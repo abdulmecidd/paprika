@@ -14,16 +14,26 @@ import { isInStandaloneMode } from "@/lib/utils";
 
 const INSTALL_PROMPT_KEY = "paprika_install_prompt_shown";
 
+interface BeforeInstallPromptEvent extends Event {
+  readonly platforms: string[];
+  readonly userChoice: Promise<{
+    outcome: "accepted" | "dismissed";
+    platform: string;
+  }>;
+  prompt(): Promise<void>;
+}
+
 export const InstallPrompt = () => {
   const [showDrawer, setShowDrawer] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
   const [platform, setPlatform] = useState<
     "ios" | "android" | "desktop" | null
   >(null);
 
   useEffect(() => {
-    const alreadyShown = localStorage.getItem(INSTALL_PROMPT_KEY);
     const installed = isInStandaloneMode();
+    const alreadyShown = localStorage.getItem(INSTALL_PROMPT_KEY);
 
     if (installed || alreadyShown) return;
 
@@ -31,24 +41,22 @@ export const InstallPrompt = () => {
     if (/iphone|ipad|ipod/.test(userAgent)) {
       setPlatform("ios");
       setShowDrawer(true);
-      localStorage.setItem(INSTALL_PROMPT_KEY, "true");
     } else if (/android/.test(userAgent)) {
       setPlatform("android");
     } else {
       setPlatform("desktop");
     }
 
-    const handler = (e: any) => {
+    const handler = (e: Event) => {
+      if (installed || localStorage.getItem(INSTALL_PROMPT_KEY)) return;
+
       e.preventDefault();
-      setDeferredPrompt(e);
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
       setShowDrawer(true);
-      localStorage.setItem(INSTALL_PROMPT_KEY, "true");
     };
 
     window.addEventListener("beforeinstallprompt", handler);
-    return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
-    };
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   const handleInstallClick = () => {
@@ -56,9 +64,15 @@ export const InstallPrompt = () => {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.finally(() => {
         setShowDrawer(false);
+        localStorage.setItem(INSTALL_PROMPT_KEY, "true");
         setDeferredPrompt(null);
       });
     }
+  };
+
+  const handleDismiss = () => {
+    setShowDrawer(false);
+    localStorage.setItem(INSTALL_PROMPT_KEY, "true");
   };
 
   return (
@@ -85,7 +99,7 @@ export const InstallPrompt = () => {
           {platform !== "ios" && deferredPrompt && (
             <Button onClick={handleInstallClick}>Yükle</Button>
           )}
-          <Button variant="ghost" onClick={() => setShowDrawer(false)}>
+          <Button variant="ghost" onClick={handleDismiss}>
             Daha sonra
           </Button>
         </DrawerFooter>
