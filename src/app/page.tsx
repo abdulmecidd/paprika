@@ -5,11 +5,11 @@ import { Typewriter } from "react-simple-typewriter";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+    <main className="min-h-screen flex flex-col items-center justify-center px-4 text-center bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       <h1 className="text-3xl font-semibold mb-2">Paprika’ya Hoşgeldin</h1>
-      <p className="text-gray-600 mb-6 max-w-md">
+      <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md">
         Aradığın{" "}
-        <span className="text-black font-medium">
+        <span className="text-black dark:text-white font-medium">
           <Typewriter
             words={[
               "psikoloji",
@@ -25,7 +25,7 @@ export default function Home() {
             deleteSpeed={50}
             delaySpeed={1500}
           />
-        </span>
+        </span>{" "}
         makalesini bulmana yardımcı olalım. (umarız)
       </p>
 
