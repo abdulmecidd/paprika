@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/footer";
 import { ModeToggle } from "@/components/modeToggle";
+import { InstallPrompt } from "@/components/installPrompt";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,7 @@ export default function RootLayout({
           </div>
 
           <div className="">{children}</div>
-
+          <InstallPrompt />
           <Footer />
         </ThemeProvider>
       </body>
