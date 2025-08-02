@@ -10,12 +10,17 @@ export const isIOS = (): boolean => {
   return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
 };
 
+interface NavigatorStandalone extends Navigator {
+  standalone?: boolean;
+}
+
 export const isInStandaloneMode = (): boolean => {
   if (typeof window === "undefined") return false;
 
-  console.log(window);
+  const navigatorExtended = window.navigator as NavigatorStandalone;
+
   return (
     window.matchMedia("(display-mode: standalone)").matches ||
-    (window.navigator as any).standalone === true
+    navigatorExtended.standalone === true
   );
 };
