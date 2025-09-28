@@ -110,46 +110,22 @@ export const ArticleCard = ({ item }: ArticleCardProps) => {
           <DialogTrigger asChild>
             <Button variant="default">Tam Makaleyi Görüntüle</Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[90vw] sm:max-h-[90vh]">
+          <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>{truncuateText(title, 60)}</DialogTitle>
               <DialogDescription>
-                Makale içeriği aşağıdaki alanda görüntüleniyor. Eğer sayfa
-                yüklenmezse
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 ml-1"
-                >
-                  buraya tıklayın
-                </a>
-                .
+                Bu makale, yayınevinin kendi sitesinde yayınlanmaktadır. Tam
+                içeriği görmek için &quot;Makaleye Git&quot; butonuna tıklamanız
+                gerekmektedir. Bu işlem sizi yeni bir sekmeye yönlendirecektir.
               </DialogDescription>
             </DialogHeader>
-            <div className="mt-2 h-[70vh] relative">
-              <iframe
-                id={`iframe-${item.DOI}`}
-                src={url}
-                className="w-full h-full border rounded-md"
-                title={title}
-                sandbox="allow-scripts allow-same-origin allow-popups"
-              ></iframe>
-              <Button
-                size="sm"
-                variant="outline"
-                className="absolute top-2 right-2"
-                onClick={() => {
-                  const iframe = document.getElementById(`iframe-${item.DOI}`);
-                  if (iframe && iframe.requestFullscreen) {
-                    iframe.requestFullscreen();
-                  }
-                }}
-              >
-                Tam Ekran
-              </Button>
-            </div>
             <DialogFooter className="flex justify-end gap-2">
+              <Button
+                variant="default"
+                onClick={() => window.open(url, "_blank")}
+              >
+                Makaleye Git
+              </Button>
               <Button variant="outline" onClick={() => setOpen(false)}>
                 Kapat
               </Button>
