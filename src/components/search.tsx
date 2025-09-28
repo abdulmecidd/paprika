@@ -4,11 +4,14 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 export default function SearchBox({
   defaultValue = "",
+  loading = false,
 }: {
   defaultValue?: string;
+  loading?: boolean;
 }) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState(defaultValue);
@@ -33,8 +36,22 @@ export default function SearchBox({
         className="flex-1"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        disabled={loading}
       />
-      <Button type="submit">Ara</Button>
+      <Button
+        type="submit"
+        disabled={loading}
+        className="flex items-center gap-2"
+      >
+        {loading ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Yükleniyor...
+          </>
+        ) : (
+          "Ara"
+        )}
+      </Button>
     </form>
   );
 }

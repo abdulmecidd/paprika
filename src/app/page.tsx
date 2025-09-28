@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import SearchBox from "@/components/search";
 import { Typewriter } from "react-simple-typewriter";
 
@@ -29,7 +30,7 @@ export default function Home() {
         makalesini bulmana yardımcı olalım. (umarız)
       </p>
 
-      <SearchBox />
+      <SearchBox defaultValue="" />
     </main>
   );
 }

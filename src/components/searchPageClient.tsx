@@ -37,7 +37,7 @@ export default function SearchPageClient() {
       <Link href="/">
         <h1 className="text-3xl font-semibold mb-4">Paprika</h1>
       </Link>
-      <SearchBox defaultValue={q} />
+      <SearchBox defaultValue={q} loading={loading} />
       <div className="my-4">
         <FilterAndSorting
           value={sort}
