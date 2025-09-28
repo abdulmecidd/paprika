@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import SearchBox from "@/components/search";
 import { Typewriter } from "react-simple-typewriter";
 

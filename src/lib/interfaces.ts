@@ -1,14 +1,17 @@
 export interface CrossrefAuthor {
-  given?: string;
-  family?: string;
-}
-export interface CrossrefResource {
-  URL?: string;
+  given: string;
+  family: string;
+  sequence?: "first" | "additional";
+  affiliation?: { name: string }[];
 }
 
 export interface CrossRefResponse {
-  items: CrossrefItem[] | [];
   totalPages: number | null;
+  items: CrossrefItem[];
+}
+
+export interface CrossrefResource {
+  URL: string;
 }
 
 export interface CrossrefItem {
@@ -22,8 +25,11 @@ export interface CrossrefItem {
   created?: {
     "date-parts": number[][];
   };
-  language?: string;
-  resource?: { primary: CrossrefResource };
+  deposited?: {
+    "date-parts": number[][];
+    "date-time"?: string;
+    timestamp?: number;
+  };
   "published-online"?: {
     "date-parts": number[][];
   };
@@ -32,4 +38,10 @@ export interface CrossrefItem {
   };
   "container-title"?: string[];
   "is-referenced-by-count"?: number;
+  "reference-count"?: number;
+  page?: string;
+  ISBN?: string[];
+  language?: string;
+  resource?: { primary: CrossrefResource };
+  score?: number;
 }

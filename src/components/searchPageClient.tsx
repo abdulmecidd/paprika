@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { searchArticles } from "@/lib/api";
 import { SkeletonCard } from "@/components/skeleton-card";
 import SearchBox from "@/components/search";
-import { CrossRefResponse } from "@/lib/interfaces";
+import { CrossrefItem, CrossRefResponse } from "@/lib/interfaces";
 import { ArticleCard } from "@/components/articleCard";
 import { PaginationCard } from "@/components/paginationCard";
 import Link from "next/link";
@@ -58,7 +58,7 @@ export default function SearchPageClient() {
       )}
       {!loading && results && results.items?.length > 0 && (
         <div className="space-y-4">
-          {results.items.map((item) => (
+          {results.items.map((item: CrossrefItem) => (
             <ArticleCard key={item.DOI} item={item} />
           ))}
           <PaginationCard
