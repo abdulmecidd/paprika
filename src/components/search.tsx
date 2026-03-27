@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function SearchBox({
   defaultValue = "",
@@ -15,6 +16,7 @@ export default function SearchBox({
 }) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState(defaultValue);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSearchQuery(defaultValue);
@@ -32,7 +34,7 @@ export default function SearchBox({
     <form onSubmit={handleSearch} className="w-full max-w-sm flex gap-2">
       <Input
         type="text"
-        placeholder="Makale veya anahtar kelime ara..."
+        placeholder={t("search_placeholder2")}
         className="flex-1"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
@@ -46,10 +48,10 @@ export default function SearchBox({
         {loading ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
-            Yükleniyor...
+            {t("loading")}
           </>
         ) : (
-          "Ara"
+          t("search_button")
         )}
       </Button>
     </form>

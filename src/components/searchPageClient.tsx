@@ -5,20 +5,27 @@ import { useEffect, useState } from "react";
 import { searchArticles } from "@/lib/api";
 import { SkeletonCard } from "@/components/skeleton-card";
 import SearchBox from "@/components/search";
-import { CrossrefItem, CrossRefResponse } from "@/lib/interfaces";
+import { UnifiedArticle, UnifiedSearchResponse } from "@/lib/interfaces";
 import { ArticleCard } from "@/components/articleCard";
 import { PaginationCard } from "@/components/paginationCard";
 import Link from "next/link";
 import { FilterAndSorting } from "@/components/filterAndSorting";
+import { useTranslation } from "react-i18next";
 
 export default function SearchPageClient() {
   const searchParams = useSearchParams();
   const q = searchParams.get("q") || "";
+  const { t } = useTranslation();
 
-  const [results, setResults] = useState<CrossRefResponse | null>(null);
+  const [results, setResults] = useState<UnifiedSearchResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  
+  // Filters
   const [sort, setSort] = useState("relevance");
+  const [sources, setSources] = useState("crossref,openalex");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     if (!q.trim()) {
@@ -26,40 +33,57 @@ export default function SearchPageClient() {
       return;
     }
     setLoading(true);
-    searchArticles(q, 10, page, sort)
+    searchArticles(q, 10, page, sort, sources, startDate, endDate)
       .then((result) => setResults(result))
       .catch(() => setResults(null))
       .finally(() => setLoading(false));
-  }, [q, page, sort]);
+  }, [q, page, sort, sources, startDate, endDate]);
 
   return (
     <main className="min-h-screen px-4 py-2 max-w-4xl mx-auto">
-      <Link href="/">
-        <h1 className="text-3xl font-semibold mb-4">Paprika</h1>
-      </Link>
-      <SearchBox defaultValue={q} loading={loading} />
+      <div className="mb-2">
+        <SearchBox defaultValue={q} loading={loading} />
+      </div>
       <div className="my-4">
         <FilterAndSorting
-          value={sort}
-          onChange={(val) => {
+          sort={sort}
+          onSortChange={(val) => {
             setSort(val);
+            setPage(1);
+          }}
+          sources={sources}
+          onSourcesChange={(val) => {
+            setSources(val);
+            setPage(1);
+          }}
+          startDate={startDate}
+          onStartDateChange={(val: string) => {
+            setStartDate(val);
+            setPage(1);
+          }}
+          endDate={endDate}
+          onEndDateChange={(val: string) => {
+            setEndDate(val);
             setPage(1);
           }}
         />
       </div>
-      <h2 className="text-2xl font-semibold mb-6 mt-6">
-        “<span className="italic">{q}</span>” için sonuçlar:
+      <h2 className="text-2xl font-semibold mb-6 mt-6 dark:text-gray-200">
+        {t("results_for", { query: q })}
       </h2>
-      {loading && <SkeletonCard />}
+      {loading && <div className="space-y-4">{[1,2,3].map(i => <SkeletonCard key={i} />)}</div>}
       {!loading && results && results.items?.length === 0 && (
-        <p className="text-center text-gray-500">
-          Arama kriterlerine uygun sonuç bulunamadı.
+        <p className="text-center text-gray-500 bg-gray-50 dark:bg-gray-800 p-8 rounded-xl border border-dashed border-gray-300 dark:border-gray-700">
+          {t("no_results")}
         </p>
       )}
       {!loading && results && results.items?.length > 0 && (
         <div className="space-y-4">
-          {results.items.map((item: CrossrefItem) => (
-            <ArticleCard key={item.DOI} item={item} />
+          <p className="text-sm text-gray-500 mb-2 dark:text-gray-400">
+            {t("total_results_found", { count: results.totalResults })}
+          </p>
+          {results.items.map((item: UnifiedArticle) => (
+            <ArticleCard key={item.id} item={item} />
           ))}
           <PaginationCard
             page={page}
@@ -71,3 +95,4 @@ export default function SearchPageClient() {
     </main>
   );
 }
+

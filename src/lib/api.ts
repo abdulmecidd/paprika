@@ -1,31 +1,29 @@
 import axios from "axios";
-import { CrossrefItem } from "./interfaces";
+import { UnifiedSearchResponse } from "./interfaces";
 
-const API_BASE_URL = "https://api.crossref.org/v1";
+const API_BASE_URL = "/api/search";
 
 export const searchArticles = async (
   query: string,
   rows: number = 10,
   page: number = 1,
-  sort: string = "relevance"
-): Promise<{
-  items: CrossrefItem[];
-  totalPages: number | null;
-}> => {
-  const offset = (page - 1) * rows;
+  sort: string = "relevance",
+  sources?: string,
+  startDate?: string,
+  endDate?: string
+): Promise<UnifiedSearchResponse> => {
+  const params = new URLSearchParams({
+    q: query,
+    rows: rows.toString(),
+    page: page.toString(),
+    sort: sort,
+  });
 
-  const response = await axios.get(
-    `${API_BASE_URL}/works?query.title=${encodeURIComponent(
-      query
-    )}&rows=${rows}&offset=${offset}&sort=${sort}`
-  );
+  if (sources) params.append("sources", sources);
+  if (startDate) params.append("startDate", startDate);
+  if (endDate) params.append("endDate", endDate);
 
-  const totalResults = response.data.message["total-results"];
-  const items: CrossrefItem[] = response.data.message.items;
-  const totalPages = Math.ceil(totalResults / rows);
+  const response = await axios.get(`${API_BASE_URL}?${params.toString()}`);
 
-  return {
-    items,
-    totalPages,
-  };
+  return response.data;
 };

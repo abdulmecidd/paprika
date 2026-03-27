@@ -3,8 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/footer";
-import { ModeToggle } from "@/components/modeToggle";
 import { InstallPrompt } from "@/components/installPrompt";
+import { Navbar } from "@/components/navbar";
+import { I18nProvider } from "@/components/i18nProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +18,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Paprika - Read article",
-  description: "Generated with galp",
+  title: "Paprika - Multi-Source Academic Search",
+  description: "A unified, open-source research engine bridging OpenAlex and Crossref. Discover millions of scholarly articles, journals, and open-access publications instantly.",
+  keywords: ["paprika", "academic", "research", "openalex", "crossref", "open access", "articles", "journals", "search engine"],
+  authors: [{ name: "Abdulmecid", url: "https://github.com/abdulmecidd/paprika" }],
+  creator: "Abdulmecid",
+  openGraph: {
+    title: "Paprika - Academic Research Engine",
+    description: "Instantly aggregate Crossref and OpenAlex to find the most relevant academic articles.",
+    type: "website",
+    url: "https://paprikaa.netlify.app/",
+    images: [{ url: "/splash.png", width: 320, height: 568, alt: "Paprika Logo" }],
+  },
+  icons: {
+    icon: "/icon-192x192.png",
+    apple: "/icon-192x192.png",
+  },
 };
 
 export default function RootLayout({
@@ -27,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" suppressHydrationWarning className="light">
+    <html lang="en" suppressHydrationWarning className="light">
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -43,20 +58,21 @@ export default function RootLayout({
           media="(device-width: 320px) and (device-height: 568px)"
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} relative`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} relative min-h-screen flex flex-col`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex justify-end px-4 py-2">
-            <ModeToggle />
-          </div>
-
-          {children}
-          <InstallPrompt />
-          <Footer />
+          <I18nProvider>
+            <Navbar />
+            <div className="flex-1 flex flex-col">
+              {children}
+            </div>
+            <InstallPrompt />
+            <Footer />
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

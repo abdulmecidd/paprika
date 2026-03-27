@@ -1,0 +1,74 @@
+{
+  "app_title": "Paprika",
+  "search_placeholder": "Search for articles...",
+  "search_button": "Search",
+  "sort_by": "Sort By",
+  "relevance": "Relevance",
+  "newest": "Newest First",
+  "issued_date": "Publication Date",
+  "date_range": "Date Range",
+  "start_date": "Start",
+  "end_date": "End",
+  "select_date": "Select date",
+  "sources": "Sources",
+  "no_results": "No results found matching your criteria.",
+  "total_results_found": "Found {{count}} total results",
+  "results_for": "Results for \"{{query}}\":",
+  "date_missing": "No Date",
+  "citation_count": "{{count}} Citations",
+  "show_details": "Show Details",
+  "hide_details": "Hide Details",
+  "authors": "Authors",
+  "journal": "Journal / Publication",
+  "abstract": "Abstract",
+  "view_article": "View Article",
+  "open_access": "Open Access",
+  "unknown_source": "Unknown",
+  "no_title": "Untitled",
+  "no_author": "No author metadata",
+  "dialog": {
+    "external_source": "This article is published externally at {{source}}.",
+    "go_to_article": "Go to Article",
+    "close": "Close",
+    "warning": "You must click 'Go to Article' to view the full text. This will redirect you to a new tab."
+  },
+  "how_it_works": {
+    "title": "How Paprika Works",
+    "description": "Paprika is a unified research tool that connects you to the world’s academic papers by bridging multiple open-source databases.",
+    "subtitle_1": "1. Multi-Source Aggregation",
+    "content_1": "Instead of relying on a single library, Paprika runs massive parallel queries against the world's largest open-access graphs, such as OpenAlex and Crossref, combining their results seamlessly.",
+    "subtitle_2": "2. Data Standardization",
+    "content_2": "Every academic API has completely different structures. We clean up and normalize these differences behind the scenes, presenting each paper in a clear, universal design—complete with citations, abstract, authors, and open-access status.",
+    "subtitle_3": "3. Intelligent Relevance",
+    "content_3": "We don’t just use keyword matching. By leveraging advanced semantic relevance scores (via algorithms like OpenAlex), Paprika strives to present the most significant and relevant findings first.",
+    "button": "How it works?"
+  },
+  "welcome": "Welcome to Paprika",
+  "intro_before": "Let us help you find the ",
+  "intro_after": " article you're looking for. (hopefully)",
+  "typewriter_words": ["psychology", "artificial intelligence", "cognitive science", "education", "neuroscience"],
+  "search_placeholder2": "Search for articles or keywords...",
+  "loading": "Loading...",
+  "footer": {
+    "warning": "Important Notice",
+    "disclaimer": "The article links on this site redirect to third-party sources. Paprika is not responsible for their content."
+  },
+  "install_prompt": {
+    "title": "Install App",
+    "ios_1": "To install this app on iOS devices, tap the ",
+    "share": "Share",
+    "ios_2": " button in Safari and select ",
+    "add_to_home": "Add to Home Screen",
+    "ios_3": ". 📱",
+    "desktop": "You can install this web app on your desktop.",
+    "default": "Would you like to install this app on your device?",
+    "install": "Install",
+    "later": "Maybe Later"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "more_pages": "More pages"
+  }
+}
+

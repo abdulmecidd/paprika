@@ -25,6 +25,9 @@ export interface CrossrefItem {
   created?: {
     "date-parts": number[][];
   };
+  issued?: {
+    "date-parts": number[][];
+  };
   deposited?: {
     "date-parts": number[][];
     "date-time"?: string;
@@ -44,4 +47,26 @@ export interface CrossrefItem {
   language?: string;
   resource?: { primary: CrossrefResource };
   score?: number;
+}
+
+export interface UnifiedArticle {
+  id: string; // DOI or OpenAlex ID
+  title: string;
+  authors: string[];
+  abstract: string | null;
+  url: string | null;
+  source: string; // "Crossref", "OpenAlex", etc.
+  date: string | null; // ISO string or YYYY string
+  score: number; // Normalized to 0-100 or raw, used for sorting
+  doi: string | null;
+  journal: string | null;
+  type?: string | null;
+  citationCount?: number | null;
+  openAccess?: boolean | null;
+}
+
+export interface UnifiedSearchResponse {
+  items: UnifiedArticle[];
+  totalPages: number | null;
+  totalResults: number;
 }

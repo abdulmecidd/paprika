@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Drawer,
   DrawerContent,
@@ -24,6 +25,7 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export const InstallPrompt = () => {
+  const { t } = useTranslation();
   const [showDrawer, setShowDrawer] = useState(false);
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
@@ -37,10 +39,12 @@ export const InstallPrompt = () => {
 
     if (installed || alreadyShown) return;
 
+    let timer: ReturnType<typeof setTimeout>;
+
     const userAgent = window.navigator.userAgent.toLowerCase();
     if (/iphone|ipad|ipod/.test(userAgent)) {
       setPlatform("ios");
-      setShowDrawer(true);
+      timer = setTimeout(() => setShowDrawer(true), 5000);
     } else if (/android/.test(userAgent)) {
       setPlatform("android");
     } else {
@@ -52,11 +56,14 @@ export const InstallPrompt = () => {
 
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
-      setShowDrawer(true);
+      timer = setTimeout(() => setShowDrawer(true), 5000);
     };
 
     window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handler);
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   const handleInstallClick = () => {
@@ -79,28 +86,29 @@ export const InstallPrompt = () => {
     <Drawer open={showDrawer} onOpenChange={setShowDrawer}>
       <DrawerContent className="p-4">
         <DrawerHeader>
-          <DrawerTitle>Uygulamayı Yükle</DrawerTitle>
+          <DrawerTitle>{t("install_prompt.title")}</DrawerTitle>
           <DrawerDescription>
             {platform === "ios" ? (
               <>
-                iOS cihazlarda bu uygulamayı yüklemek için Safari’de{" "}
-                <span className="font-semibold">Paylaş</span> butonuna dokunun
-                ve <span className="font-semibold">Ana Ekrana Ekle</span>{" "}
-                seçeneğini seçin. 📱
+                {t("install_prompt.ios_1")}
+                <span className="font-semibold">{t("install_prompt.share")}</span>
+                {t("install_prompt.ios_2")}
+                <span className="font-semibold">{t("install_prompt.add_to_home")}</span>
+                {t("install_prompt.ios_3")}
               </>
             ) : platform === "desktop" ? (
-              <>Bu web uygulamasını masaüstüne yükleyebilirsiniz.</>
+              <>{t("install_prompt.desktop")}</>
             ) : (
-              <>Bu uygulamayı cihazınıza yüklemek ister misiniz?</>
+              <>{t("install_prompt.default")}</>
             )}
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
           {platform !== "ios" && deferredPrompt && (
-            <Button onClick={handleInstallClick}>Yükle</Button>
+            <Button onClick={handleInstallClick}>{t("install_prompt.install")}</Button>
           )}
           <Button variant="ghost" onClick={handleDismiss}>
-            Daha sonra
+            {t("install_prompt.later")}
           </Button>
         </DrawerFooter>
       </DrawerContent>

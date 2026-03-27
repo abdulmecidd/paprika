@@ -1,0 +1,73 @@
+{
+  "app_title": "Paprika",
+  "search_placeholder": "Makale ara...",
+  "search_button": "Ara",
+  "sort_by": "Sıralama",
+  "relevance": "İlgililiğe göre",
+  "newest": "Yeni eklenenler",
+  "issued_date": "Yayınlanma tarihi",
+  "date_range": "Tarih Aralığı",
+  "start_date": "Başlangıç",
+  "end_date": "Bitiş",
+  "select_date": "Tarih seçin",
+  "sources": "Kaynaklar",
+  "no_results": "Arama kriterlerine uygun sonuç bulunamadı.",
+  "total_results_found": "Toplam {{count}} sonuç bulundu",
+  "results_for": "\"{{query}}\" için sonuçlar:",
+  "date_missing": "Tarih yok",
+  "citation_count": "{{count}} Atıf",
+  "show_details": "Detayları Göster",
+  "hide_details": "Detayları Gizle",
+  "authors": "Yazarlar",
+  "journal": "Dergi / Yayın",
+  "abstract": "Özet (Abstract)",
+  "view_article": "Makaleyi Görüntüle",
+  "open_access": "Açık Erişim",
+  "unknown_source": "Bilinmiyor",
+  "no_title": "Başlık bulunamadı",
+  "no_author": "Yazar bilgisi yok",
+  "dialog": {
+    "external_source": "Bu makale dış bir kaynakta ({{source}}) yayınlanmaktadır.",
+    "go_to_article": "Makaleye Git",
+    "close": "Kapat",
+    "warning": "Tam içeriği görmek için 'Makaleye Git' butonuna tıklamanız gerekmektedir. Bu işlem sizi yeni bir sekmeye yönlendirecektir."
+  },
+  "how_it_works": {
+    "title": "Paprika Nasıl Çalışır?",
+    "description": "Paprika, açık kaynaklı araştırma veritabanlarını tek elde toplayarak sizi dünyanın akademik verilerine doğrudan bağlayan merkezi bir araştırma aracıdır.",
+    "subtitle_1": "1. Çoklu Kaynak Taraması",
+    "content_1": "Tek bir kaynağa bağlı kalmak yerine, OpenAlex ve Crossref gibi dünyanın en büyük açık akademik veri tabanlarına eşzamanlı, paralel sorgular gönderiyor ve oradan dönen verileri tek bir havuzda birleştiriyoruz.",
+    "subtitle_2": "2. Kusursuz Veri Standardizasyonu",
+    "content_2": "Her araştırma API'si farklı ve karmaşık yapıdadır. Biz bu yapısal farklılıkları arka planda sizin için temizliyor, her bir makaleyi ortak, okunaklı, net bir tasarımla (Özetler, Yazarlar, Atıf Sayıları, DOI gibi bilgilerle) tek bir çatı altında sunuyoruz.",
+    "subtitle_3": "3. Akıllı ve Semantik İlgililik",
+    "content_3": "Sadece düz kelime eşleştirmesi yapmıyoruz. (Örneğin OpenAlex gibi) Platformların sunduğu semantik ilgililik skorlarını değerlendirerek, en değerli bulguları en üstte karşınıza çıkarmayı amaçlıyoruz.",
+    "button": "Nasıl çalışır?"
+  },
+  "welcome": "Paprika'ya Hoşgeldin",
+  "intro_before": "Aradığın ",
+  "intro_after": " makalesini bulmana yardımcı olalım. (umarız)",
+  "typewriter_words": ["psikoloji", "yapay zeka", "bilişsel bilim", "eğitim", "nörobilim"],
+  "search_placeholder2": "Makale veya anahtar kelime ara...",
+  "loading": "Yükleniyor...",
+  "footer": {
+    "warning": "Önemli Uyarı",
+    "disclaimer": "Bu sitedeki makale bağlantıları üçüncü taraf kaynaklara yönlendirilir. Paprika bu içeriklerden sorumlu değildir."
+  },
+  "install_prompt": {
+    "title": "Uygulamayı Yükle",
+    "ios_1": "iOS cihazlarda bu uygulamayı yüklemek için Safari’de ",
+    "share": "Paylaş",
+    "ios_2": " butonuna dokunun ve ",
+    "add_to_home": "Ana Ekrana Ekle",
+    "ios_3": " seçeneğini seçin. 📱",
+    "desktop": "Bu web uygulamasını masaüstüne yükleyebilirsiniz.",
+    "default": "Bu uygulamayı cihazınıza yüklemek ister misiniz?",
+    "install": "Yükle",
+    "later": "Daha sonra"
+  },
+  "pagination": {
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "more_pages": "Daha fazla sayfa"
+  }
+}
