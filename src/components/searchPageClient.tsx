@@ -8,7 +8,6 @@ import SearchBox from "@/components/search";
 import { UnifiedArticle, UnifiedSearchResponse } from "@/lib/interfaces";
 import { ArticleCard } from "@/components/articleCard";
 import { PaginationCard } from "@/components/paginationCard";
-import Link from "next/link";
 import { FilterAndSorting } from "@/components/filterAndSorting";
 import { useTranslation } from "react-i18next";
 

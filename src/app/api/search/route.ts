@@ -1,7 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import { CrossrefItem, UnifiedArticle, UnifiedSearchResponse } from "@/lib/interfaces";
+import { CrossrefItem, UnifiedArticle } from "@/lib/interfaces";
 
+interface OpenAlexItem {
+  id: string;
+  title?: string;
+  authorships?: Array<{ author: { display_name: string } }>;
+  abstract_inverted_index?: Record<string, number[]>;
+  doi?: string;
+  publication_date?: string;
+  publication_year?: number;
+  relevance_score?: number;
+  primary_location?: { source?: { display_name?: string } };
+  type?: string;
+  cited_by_count?: number;
+  open_access?: { is_oa?: boolean };
+}
 const CROSSREF_API = "https://api.crossref.org/v1/works";
 const OPENALEX_API = "https://api.openalex.org/works";
 
@@ -41,8 +55,8 @@ function normalizeCrossref(item: CrossrefItem): UnifiedArticle {
 }
 
 // Helper to normalize OpenAlex
-function normalizeOpenAlex(item: any): UnifiedArticle {
-  const authors = item.authorships?.map((a: any) => a.author.display_name) || [];
+function normalizeOpenAlex(item: OpenAlexItem): UnifiedArticle {
+  const authors = item.authorships?.map((a) => a.author.display_name) || [];
   
   // OpenAlex provides abstract_inverted_index. We need to reconstruct it if we want the full text.
   let abstract = null;
@@ -101,7 +115,7 @@ export async function GET(request: NextRequest) {
 
   // 1. Crossref
   if (useCrossref) {
-    let crossrefRows = useOpenAlex ? halfRows : rows;
+    const crossrefRows = useOpenAlex ? halfRows : rows;
     
     // Crossref filter mapping
     let filterStr = "";
@@ -126,7 +140,7 @@ export async function GET(request: NextRequest) {
 
   // 2. OpenAlex
   if (useOpenAlex) {
-    let openAlexRows = useCrossref ? halfRows : rows;
+    const openAlexRows = useCrossref ? halfRows : rows;
     
     // OpenAlex filter mapping
     const filters = [];
@@ -134,7 +148,7 @@ export async function GET(request: NextRequest) {
     if (endDate) filters.push(`to_publication_date:${endDate}`);
     if (q) filters.push(`default.search:${encodeURIComponent(q)}`); // OpenAlex semantic/keyword search
     
-    let filterStr = filters.length > 0 ? `filter=${filters.join(",")}` : "";
+    const filterStr = filters.length > 0 ? `filter=${filters.join(",")}` : "";
     
     // OpenAlex uses page instead of offset
     const openAlexUrl = `${OPENALEX_API}?${filterStr}&per-page=${openAlexRows}&page=${page}`;
@@ -161,7 +175,7 @@ export async function GET(request: NextRequest) {
       unifiedItems = [...unifiedItems, ...items.map(normalizeCrossref)];
       totalResults += result.data["total-results"] || 0;
     } else if (result.source === "openalex") {
-      const items = result.data.results as any[];
+      const items = result.data.results as OpenAlexItem[];
       unifiedItems = [...unifiedItems, ...items.map(normalizeOpenAlex)];
       totalResults += result.data.meta?.count || 0;
     }

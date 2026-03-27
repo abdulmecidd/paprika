@@ -10,7 +10,7 @@ import {
   CardTitle,
   CardDescription,
 } from "./ui/card";
-import { Calendar, Globe, FileText, Users, BookOpen, Quote, Unlock } from "lucide-react";
+import { Calendar, FileText, Users, BookOpen, Quote, Unlock } from "lucide-react";
 import { truncuateText } from "@/lib/funcs";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,7 +39,6 @@ export const ArticleCard = ({ item }: ArticleCardProps) => {
   const authors = item.authors.length > 0 ? item.authors.join(", ") : t("no_author");
   const journal = item.journal || null;
   const abstract = item.abstract || null;
-  const score = item.score ? Math.round(item.score).toString() : null;
   const citationCount = item.citationCount ?? null;
   const type = item.type ? item.type.charAt(0).toUpperCase() + item.type.slice(1) : null;
   const isOA = item.openAccess === true;

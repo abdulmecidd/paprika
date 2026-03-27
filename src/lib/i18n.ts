@@ -15,7 +15,7 @@ const getInitialLanguage = () => {
     
     const browserLang = window.navigator.language;
     if (browserLang.startsWith("tr")) return "tr";
-  } catch (error) {
+  } catch {
     // Ignore permissions or undefined window properties
   }
   
@@ -40,7 +40,7 @@ if (typeof window !== "undefined") {
   i18n.on('languageChanged', (lng) => {
     try {
       window.localStorage.setItem("i18nextLng", lng);
-    } catch (error) {}
+    } catch {}
   });
 }
 
