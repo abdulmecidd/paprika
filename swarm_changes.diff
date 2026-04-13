@@ -1,0 +1,108 @@
+--- /dev/null
++++ b/src/components/StructuredData.tsx
+@@ -0,0 +1,11 @@
++import React from 'react';
++
++export default function StructuredData({ data, id }: { data: Record<string, any>; id?: string }) {
++  // Security: Escape the < character to prevent XSS via malicious content or closing script tags.
++  const jsonString = JSON.stringify(data).replace(/</g, '\\u003c');
++  return (
++    <script
++      type="application/ld+json"
++      id={id}
++      dangerouslySetInnerHTML={{ __html: jsonString }}
++    />
++  );
++}
+--- a/src/app/layout.tsx
++++ b/src/app/layout.tsx
+@@ -4,6 +4,7 @@
+ import "./globals.css";
+ import { ThemeProvider } from "@/components/theme-provider";
+ import { I18nProvider } from "@/components/i18nProvider";
++import StructuredData from "@/components/StructuredData";
+ 
+ export const metadata: Metadata = {
+   title: {
+@@ -35,11 +36,36 @@
+   },
+ };
+ 
++const organizationSchema = {
++  "@context": "https://schema.org",
++  "@type": "Organization",
++  "name": "Paprika",
++  "url": "https://paprikaa.netlify.app/",
++  "logo": "https://paprikaa.netlify.app/icon-192x192.png",
++  "sameAs": [
++    "https://github.com/abdulmecidd/paprika"
++  ]
++};
++
++const websiteSchema = {
++  "@context": "https://schema.org",
++  "@type": "WebSite",
++  "name": "Paprika",
++  "url": "https://paprikaa.netlify.app/",
++  "potentialAction": {
++    "@type": "SearchAction",
++    "target": {
++      "@type": "EntryPoint",
++      "urlTemplate": "https://paprikaa.netlify.app/search?q={search_term_string}"
++    },
++    "query-input": "required name=search_term_string"
++  }
++};
++
+ export default function RootLayout({
+   children,
+ }: Readonly<{
+   children: React.ReactNode;
+ }>) {
+-
+   return (
+     <html lang="en" suppressHydrationWarning>
+       <head>
+@@ -47,6 +73,8 @@
+         <meta name="apple-mobile-web-app-capable" content="yes" />
+         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+         <meta name="apple-mobile-web-app-title" content="Paprika" />
++        <StructuredData data={organizationSchema} id="ld-organization" key="ld-organization" />
++        <StructuredData data={websiteSchema} id="ld-website" key="ld-website" />
+       </head>
+       <body className="antialiased min-h-screen bg-background text-foreground transition-colors duration-300">
+         <ThemeProvider
+--- a/src/app/search/page.tsx
++++ b/src/app/search/page.tsx
+@@ -1,6 +1,25 @@
+ import SearchPageClient from "@/components/searchPageClient";
++import StructuredData from "@/components/StructuredData";
++
++const breadcrumbSchema = {
++  "@context": "https://schema.org",
++  "@type": "BreadcrumbList",
++  "itemListElement": [
++    {
++      "@type": "ListItem",
++      "position": 1,
++      "name": "Home",
++      "item": "https://paprikaa.netlify.app/"
++    },
++    {
++      "@type": "ListItem",
++      "position": 2,
++      "name": "Search",
++      "item": "https://paprikaa.netlify.app/search"
++    }
++  ]
++};
+ 
+ export default function SearchPage() {
+-  return <SearchPageClient />;
++  return (
++    <>
++      <StructuredData data={breadcrumbSchema} id="ld-breadcrumbs" />
++      <SearchPageClient />
++    </>
++  );
+ }
