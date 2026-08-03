@@ -25,18 +25,22 @@ export default function SearchPageClient() {
   const [sources, setSources] = useState("crossref,openalex");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [author, setAuthor] = useState("");
+  const [journal, setJournal] = useState("");
+  const [oaOnly, setOaOnly] = useState(false);
+  const [docType, setDocType] = useState("all");
 
   useEffect(() => {
-    if (!q.trim()) {
+    if (!q.trim() && !author.trim() && !journal.trim()) {
       setResults(null);
       return;
     }
     setLoading(true);
-    searchArticles(q, 10, page, sort, sources, startDate, endDate)
+    searchArticles(q, 10, page, sort, sources, startDate, endDate, author, journal, oaOnly, docType)
       .then((result) => setResults(result))
       .catch(() => setResults(null))
       .finally(() => setLoading(false));
-  }, [q, page, sort, sources, startDate, endDate]);
+  }, [q, page, sort, sources, startDate, endDate, author, journal, oaOnly, docType]);
 
   return (
     <main className="min-h-screen px-4 py-2 max-w-4xl mx-auto">
@@ -65,6 +69,27 @@ export default function SearchPageClient() {
             setEndDate(val);
             setPage(1);
           }}
+          author={author}
+          onAuthorChange={(val: string) => {
+            setAuthor(val);
+            setPage(1);
+          }}
+          journal={journal}
+          onJournalChange={(val: string) => {
+            setJournal(val);
+            setPage(1);
+          }}
+          oaOnly={oaOnly}
+          onOaOnlyChange={(val: boolean) => {
+            setOaOnly(val);
+            setPage(1);
+          }}
+          docType={docType}
+          onDocTypeChange={(val: string) => {
+            setDocType(val);
+            setPage(1);
+          }}
+          onClearFilters={() => setPage(1)}
         />
       </div>
       <h2 className="text-2xl font-semibold mb-6 mt-6 dark:text-gray-200">

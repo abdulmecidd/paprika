@@ -69,5 +69,88 @@
     "previous": "Önceki",
     "next": "Sonraki",
     "more_pages": "Daha fazla sayfa"
+  },
+  "cite": "Alıntı Yap",
+  "citation_modal": {
+    "title": "Akademik Alıntı Oluşturucu",
+    "description": "Bu makale için hazır alıntı biçimleri ve BibTeX çıktısı:",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı!",
+    "formats": {
+      "bibtex": "BibTeX",
+      "apa": "APA 7th",
+      "mla": "MLA 9th",
+      "ieee": "IEEE",
+      "chicago": "Chicago"
+    }
+  },
+  "what_changed": {
+    "button": "Neler Değişti?",
+    "title": "Neler Değişti? — Sürüm Zaman Çizelgesi",
+    "description": "Paprika'nın ilk sürümünden bugüne geçirdiği tüm yenilikler ve adım adım sürüm geçmişi:",
+    "steps": [
+      {
+        "version": "v2.0.0",
+        "date": "Ağustos 2026",
+        "title": "Alıntı Motoru & Sürüm Zaman Çizelgesi",
+        "badge": "En Son Sürüm",
+        "changes": [
+          "BibTeX, APA, MLA, IEEE ve Chicago destekli canlı alıntı oluşturucu modalı eklendi.",
+          "Adım adım 'Neler Değişti?' sürüm zaman çizelgesi entegre edildi.",
+          "Çoklu dil (TR/EN) altyapısı yeni modallar için genişletildi."
+        ]
+      },
+      {
+        "version": "v1.2.0",
+        "date": "27 Mart 2026",
+        "title": "Çoklu Dil & Çift API Entegrasyonu",
+        "badge": "Önemli Güncelleme",
+        "changes": [
+          "Crossref ve OpenAlex veritabanlarını eşzamanlı sorgulayan çift kaynak altyapısı kuruldu.",
+          "Sıfır-flicker istemci taraflı dil algılamalı i18n (Türkçe & İngilizce) eklendi.",
+          "Gelişmiş takvim tabanlı tarih aralığı filtreleme ve sıralama sistemi getirildi.",
+          "Next.js 15 App Router & Turbopack derleme ve ESLint hataları çözüldü."
+        ]
+      },
+      {
+        "version": "v1.1.0",
+        "date": "28 Eylül 2025",
+        "title": "Arayüz & Güvenlik Düzeltmeleri",
+        "badge": "Kararlılık",
+        "changes": [
+          "Buton yüklenme durumları (loading state) geliştirildi.",
+          "Iframe ve yönlendirme (redirect) kuralları temizlenerek güvenlik artırıldı."
+        ]
+      },
+      {
+        "version": "v1.0.0",
+        "date": "Eylül 2024",
+        "title": "İlk Sürüm & Temel Mimari",
+        "badge": "İlk Çıkış",
+        "changes": [
+          "Paprika akademik arama motorunun ilk prototipi yayınlandı.",
+          "Makale kartları (Article Card), sayfalama (pagination) ve detay görünümleri eklendi.",
+          "Dark mode ve PWA (Progressive Web App) masaüstü/mobil yükleme altyapısı hazırlandı."
+        ]
+      }
+    ]
+  },
+  "filters": {
+    "advanced": "Gelişmiş Filtreler",
+    "hide_advanced": "Gelişmiş Filtreleri Gizle",
+    "author_placeholder": "Yazar adı (Örn: Albert Einstein)",
+    "journal_placeholder": "Dergi veya Yayın adı (Örn: Nature)",
+    "oa_only": "Sadece Açık Erişim (Open Access)",
+    "clear": "Filtreleri Temizle",
+    "author": "Yazar",
+    "journal": "Dergi",
+    "doc_type": "Doküman Tipi",
+    "doc_types": {
+      "all": "Tüm Yayın Türleri",
+      "journal_article": "Dergi Makalesi",
+      "book_chapter": "Kitap Bölümü",
+      "proceedings": "Konferans Bildirisi",
+      "preprint": "Preprint (Önbaskı)"
+    }
   }
 }

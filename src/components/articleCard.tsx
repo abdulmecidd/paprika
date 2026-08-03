@@ -24,6 +24,8 @@ import {
 } from "@/components/ui/dialog";
 import { useTranslation } from "react-i18next";
 
+import { CitationModal } from "./citationModal";
+
 interface ArticleCardProps {
   item: UnifiedArticle;
 }
@@ -66,6 +68,19 @@ export const ArticleCard = ({ item }: ArticleCardProps) => {
             )}
             {item.doi && <span className="text-xs">DOI: {item.doi}</span>}
           </CardDescription>
+
+          {item.concepts && item.concepts.length > 0 && (
+            <div className="mt-2.5 flex flex-wrap gap-1.5">
+              {item.concepts.map((concept, idx) => (
+                <span
+                  key={idx}
+                  className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 dark:bg-gray-700/70 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600/60"
+                >
+                  #{concept}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </CardHeader>
 
@@ -122,10 +137,10 @@ export const ArticleCard = ({ item }: ArticleCardProps) => {
           </div>
         )}
       </CardContent>
-      <CardFooter className="pt-2">
+      <CardFooter className="pt-2 flex items-center justify-between sm:justify-start gap-2">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button variant="default" className="w-full sm:w-auto">{t("view_article")}</Button>
+            <Button variant="default" className="flex-1 sm:flex-initial">{t("view_article")}</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
@@ -151,6 +166,7 @@ export const ArticleCard = ({ item }: ArticleCardProps) => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+        <CitationModal item={item} />
       </CardFooter>
     </Card>
   );

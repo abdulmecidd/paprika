@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ModeToggle } from "./modeToggle";
 import { LanguageSwitcher } from "./languageSwitcher";
 import { HowItWorks } from "./howItWorks";
+import { WhatChanged } from "./whatChanged";
 
 export const Navbar = () => {
   return (
@@ -14,6 +15,7 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="flex items-center gap-2">
+        <WhatChanged />
         <HowItWorks />
         <LanguageSwitcher />
         <ModeToggle />

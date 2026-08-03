@@ -10,7 +10,11 @@ export const searchArticles = async (
   sort: string = "relevance",
   sources?: string,
   startDate?: string,
-  endDate?: string
+  endDate?: string,
+  author?: string,
+  journal?: string,
+  oaOnly?: boolean,
+  docType?: string
 ): Promise<UnifiedSearchResponse> => {
   const params = new URLSearchParams({
     q: query,
@@ -22,6 +26,10 @@ export const searchArticles = async (
   if (sources) params.append("sources", sources);
   if (startDate) params.append("startDate", startDate);
   if (endDate) params.append("endDate", endDate);
+  if (author) params.append("author", author);
+  if (journal) params.append("journal", journal);
+  if (oaOnly) params.append("oaOnly", "true");
+  if (docType && docType !== "all") params.append("docType", docType);
 
   const response = await axios.get(`${API_BASE_URL}?${params.toString()}`);
 

@@ -69,6 +69,89 @@
     "previous": "Previous",
     "next": "Next",
     "more_pages": "More pages"
+  },
+  "cite": "Cite Paper",
+  "citation_modal": {
+    "title": "Academic Citation Generator",
+    "description": "Ready-to-use citations and BibTeX output for this paper:",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "formats": {
+      "bibtex": "BibTeX",
+      "apa": "APA 7th",
+      "mla": "MLA 9th",
+      "ieee": "IEEE",
+      "chicago": "Chicago"
+    }
+  },
+  "what_changed": {
+    "button": "What's New?",
+    "title": "What Changed? — Release Timeline",
+    "description": "Step-by-step timeline of all Paprika features and major release milestones:",
+    "steps": [
+      {
+        "version": "v2.0.0",
+        "date": "August 2026",
+        "title": "Citation Engine & Release Timeline",
+        "badge": "Latest Release",
+        "changes": [
+          "Added interactive citation generator modal supporting BibTeX, APA, MLA, IEEE, and Chicago.",
+          "Integrated step-by-step 'What Changed?' release timeline.",
+          "Expanded bilingual (TR/EN) i18n support for all new modals and actions."
+        ]
+      },
+      {
+        "version": "v1.2.0",
+        "date": "March 27, 2026",
+        "title": "Multi-Source & Localization Upgrade",
+        "badge": "Major Update",
+        "changes": [
+          "Built dual-source engine querying Crossref and OpenAlex open-access graphs simultaneously.",
+          "Added zero-flicker client-side locale detector with full English & Turkish translations.",
+          "Introduced calendar date-range filtering and relevance sorting.",
+          "Resolved Next.js 15 App Router & Turbopack build and ESLint issues."
+        ]
+      },
+      {
+        "version": "v1.1.0",
+        "date": "September 28, 2025",
+        "title": "UI Refinements & Security Cleanup",
+        "badge": "Stability",
+        "changes": [
+          "Enhanced button loading states across search and action workflows.",
+          "Cleaned up iframe embedding and redirect rules for improved security."
+        ]
+      },
+      {
+        "version": "v1.0.0",
+        "date": "September 2024",
+        "title": "Initial Launch & Core Architecture",
+        "badge": "Initial Release",
+        "changes": [
+          "Launched the initial version of Paprika academic search engine.",
+          "Implemented Unified Article Cards, pagination, and detailed metadata modal.",
+          "Added dark mode support and Progressive Web App (PWA) installation features."
+        ]
+      }
+    ]
+  },
+  "filters": {
+    "advanced": "Advanced Filters",
+    "hide_advanced": "Hide Advanced Filters",
+    "author_placeholder": "Author name (e.g. Albert Einstein)",
+    "journal_placeholder": "Journal or Publication (e.g. Nature)",
+    "oa_only": "Open Access Only",
+    "clear": "Clear Filters",
+    "author": "Author",
+    "journal": "Journal",
+    "doc_type": "Document Type",
+    "doc_types": {
+      "all": "All Document Types",
+      "journal_article": "Journal Article",
+      "book_chapter": "Book Chapter",
+      "proceedings": "Conference Proceedings",
+      "preprint": "Preprint"
+    }
   }
 }
 

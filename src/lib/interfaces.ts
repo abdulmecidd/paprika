@@ -47,6 +47,7 @@ export interface CrossrefItem {
   language?: string;
   resource?: { primary: CrossrefResource };
   score?: number;
+  subject?: string[];
 }
 
 export interface UnifiedArticle {
@@ -63,6 +64,7 @@ export interface UnifiedArticle {
   type?: string | null;
   citationCount?: number | null;
   openAccess?: boolean | null;
+  concepts?: string[];
 }
 
 export interface UnifiedSearchResponse {
